@@ -28,3 +28,10 @@ spline.Add(2, -4);
 spline.Add(6, 6);	
 double result = spline.Interpolate(3.5);		
 ```
+
+## Optional parameters and overloads
+
+All classes have overloaded constructors and overloaded `Add` methods, that take:
+* Single X and Y value - `Add(double ValueX, double ValueY)`
+* Dictionary of X and Y values - `Add(Dictionary<double, double> Values)`
+* Arrays of X and Y values `Add(double[] ValuesX, double[] ValuesY)`
