@@ -109,7 +109,7 @@ namespace Data.Annex.MathExtended.Interpolation
 
         public double Interpolate(double X)
         {
-            if (_points.Count < 2)
+            if (_points.Count < 3)
                 throw new ArgumentOutOfRangeException("points", "Not enough data points.");
             CalculateSpline();
             var _interval = PointFunctions.FindIntervalIndex(X, _points);

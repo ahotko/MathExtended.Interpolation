@@ -66,5 +66,17 @@ namespace MathExtended.InterpolationTest
             Assert.AreEqual(0, _interpolation.Interpolate(3.928), 0.01, "Spline interpolation at x=3.928 failed!");
             Assert.AreEqual(-5.027, _interpolation.Interpolate(1), 0.01, "Spline interpolation at x=1 failed!");
         }
+
+        [TestMethod]
+        public void InterpolationCosine()
+        {
+            var _interpolation = new Cosine();
+            _interpolation.Add(0, 5);
+            _interpolation.Add(2, -5);
+            _interpolation.Add(4, 6);
+            Assert.AreEqual(0, _interpolation.Interpolate(1), 0.01, "Cosine interpolation at x=0 failed!");
+            Assert.AreEqual(0.5, _interpolation.Interpolate(3), 0.01, "Cosine interpolation at x=3 failed!");
+            Assert.AreEqual(4.3891, _interpolation.Interpolate(3.5), 0.01, "Cosine interpolation at x=3.5 failed!");
+        }
     }
 }
