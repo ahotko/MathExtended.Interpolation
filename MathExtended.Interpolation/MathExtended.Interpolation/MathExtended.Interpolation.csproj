@@ -43,6 +43,7 @@
     <Compile Include="Interpolation.Cosine.cs" />
     <Compile Include="Interpolation.Linear.cs" />
     <Compile Include="Interpolation.Parabolic.cs" />
+    <Compile Include="Interpolation.Point.cs" />
     <Compile Include="Interpolation.Spline.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

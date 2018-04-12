@@ -9,7 +9,7 @@ namespace Data.Annex.MathExtended.Interpolation
     public class Cosine
     {
         private bool _changed = true;
-        private List<PointXY> _points = new List<PointXY>();
+        private List<Cartesian2D> _points = new List<Cartesian2D>();
         private double[] _derivatives;
 
         private void Sort()
@@ -19,7 +19,7 @@ namespace Data.Annex.MathExtended.Interpolation
 
         public void Add(double ValueX, double ValueY)
         {
-            _points.Add(new PointXY() { X = ValueX, Y = ValueY });
+            _points.Add(new Cartesian2D(ValueX, ValueY));
             _changed = true;
         }
 
@@ -29,7 +29,7 @@ namespace Data.Annex.MathExtended.Interpolation
                 throw new ArgumentException();
             for (int n = 0; n < ValuesX.Length; n++)
             {
-                _points.Add(new PointXY() { X = ValuesX[n], Y = ValuesY[n] });
+                _points.Add(new Cartesian2D() { X = ValuesX[n], Y = ValuesY[n] });
             }
             _changed = true;
         }
@@ -38,7 +38,7 @@ namespace Data.Annex.MathExtended.Interpolation
         {
             foreach (KeyValuePair<double, double> _pair in Values)
             {
-                _points.Add(new PointXY() { X = _pair.Key, Y = _pair.Value });
+                _points.Add(new Cartesian2D(_pair.Key, _pair.Value));
             }
             _changed = true;
         }

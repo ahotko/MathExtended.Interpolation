@@ -5,13 +5,7 @@ namespace Data.Annex.MathExtended.Interpolation
 {
     public class Parabolic
     {
-        private class PointXY
-        {
-            public double X { get; set; }
-            public double Y { get; set; }
-        }
-
-        private List<PointXY> _points = new List<PointXY>();
+        private List<Cartesian2D> _points = new List<Cartesian2D>();
         private bool _changed = true;
         private double _a;
         private double _b;
@@ -50,7 +44,7 @@ namespace Data.Annex.MathExtended.Interpolation
         {
             if (_points.Count == 3)
                 throw new ArgumentException("Parabolic interpolation requires 3 points.");
-            _points.Add(new PointXY() { X = ValueX, Y = ValueY });
+            _points.Add(new Cartesian2D() { X = ValueX, Y = ValueY });
             _changed = true;
         }
 
@@ -60,7 +54,7 @@ namespace Data.Annex.MathExtended.Interpolation
                 throw new ArgumentException("Parabolic interpolation requires 3 points.");
             for (int n = 0; n < ValuesX.Length; n++)
             {
-                _points.Add(new PointXY() { X = ValuesX[n], Y = ValuesY[n] });
+                _points.Add(new Cartesian2D() { X = ValuesX[n], Y = ValuesY[n] });
             }
             _changed = true;
         }
@@ -71,7 +65,7 @@ namespace Data.Annex.MathExtended.Interpolation
                 throw new ArgumentException("Parabolic interpolation requires 3 points.");
             foreach (KeyValuePair<double, double> _pair in Values)
             {
-                _points.Add(new PointXY() { X = _pair.Key, Y = _pair.Value });
+                _points.Add(new Cartesian2D() { X = _pair.Key, Y = _pair.Value });
             }
             _changed = true;
         }
