@@ -39,4 +39,41 @@ namespace Data.Annex.MathExtended.Interpolation
             return base.GetHashCode();
         }
     }
+
+    static class PointFunctions
+    {
+        public static Tuple<int,int> FindIntervalIndex(double x, List<Cartesian2D> points)
+        {
+            int _idxLeft = 0;
+            int _idxRight = points.Count - 1;
+            //bracket the X value using binary search
+            while (_idxRight - _idxLeft > 1)
+            {
+                int i = (_idxLeft + _idxRight) / 2;
+                if (points[i].X > x)
+                    _idxRight = i;
+                else
+                    _idxLeft = i;
+            }
+            return new Tuple<int, int>(_idxLeft, _idxRight);
+        }
+
+        public static Tuple<Cartesian2D, Cartesian2D> FindInterval(double x, List<Cartesian2D> points)
+        {
+            if (x >= points[points.Count - 1].X || x <= points[0].X)
+                return new Tuple<Cartesian2D, Cartesian2D>(null, null);
+            int _idxLeft = 0;
+            int _idxRight = points.Count - 1;
+            //bracket the X value using binary search
+            while (_idxRight - _idxLeft > 1)
+            {
+                int i = (_idxLeft + _idxRight) / 2;
+                if (points[i].X > x)
+                    _idxRight = i;
+                else
+                    _idxLeft = i;
+            }
+            return new Tuple<Cartesian2D, Cartesian2D>(points[_idxLeft], points[_idxRight]);
+        }
+    }
 }

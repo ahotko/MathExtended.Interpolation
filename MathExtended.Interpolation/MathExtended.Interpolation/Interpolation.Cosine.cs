@@ -69,9 +69,14 @@ namespace Data.Annex.MathExtended.Interpolation
         public double Interpolate(double X)
         {
             if (_points.Count < 2)
-                throw new ArgumentOutOfRangeException("points", "Not enough data points.");
-            double _result = 0.0;
-            return _result;
+                throw new ArgumentException("Interpolation requires at least 2 points.");
+            if (_changed) Sort();
+            var _interval = PointFunctions.FindInterval(X, _points);
+            var _left = _interval.Item1;
+            var _right = _interval.Item2;
+            if (_left == null || _right == null || _left.Equals(_right))
+                throw new ArgumentOutOfRangeException();
+            return (_left.Y + (((X - _left.X) / (_right.X - _left.X)) * (_right.Y - _left.Y)));
         }
     }
 }

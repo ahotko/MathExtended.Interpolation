@@ -78,8 +78,11 @@ namespace Data.Annex.MathExtended.Interpolation
             if (_points.Count < 2)
                 throw new ArgumentException("Linear interpolation requires at least 2 points.");
             if (_changed) Sort();
-            var _left = _points.Where(p => p.X <= X).LastOrDefault();
-            var _right = _points.Where(p => p.X > X).FirstOrDefault();
+            var _interval = PointFunctions.FindInterval(X, _points);
+            var _left = _interval.Item1;
+            var _right = _interval.Item2;
+            //var _left = _points.Where(p => p.X <= X).LastOrDefault();
+            //var _right = _points.Where(p => p.X > X).FirstOrDefault();
             if(_left == null || _right == null || _left.Equals(_right))
                 throw new ArgumentOutOfRangeException();
             return (_left.Y + (((X - _left.X) / (_right.X - _left.X)) * (_right.Y - _left.Y)));

@@ -112,17 +112,9 @@ namespace Data.Annex.MathExtended.Interpolation
             if (_points.Count < 2)
                 throw new ArgumentOutOfRangeException("points", "Not enough data points.");
             CalculateSpline();
-            int _idxLeft = 0;
-            int _idxRight = _points.Count - 1;
-            //bracket the X value using binary search
-            while (_idxRight - _idxLeft > 1)
-            {
-                int i = (_idxLeft + _idxRight) / 2;
-                if (_points[i].X > X)
-                    _idxRight = i;
-                else
-                    _idxLeft = i;
-            }
+            var _interval = PointFunctions.FindIntervalIndex(X, _points);
+            int _idxLeft = _interval.Item1;
+            int _idxRight = _interval.Item2;
             //width of bracketing interval
             double _dX = _points[_idxRight].X - _points[_idxLeft].X;
             if (_dX == 0.0)
