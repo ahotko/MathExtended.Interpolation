@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Interpolation.Cosine.cs" />
+    <Compile Include="Interpolation.Abstract.cs" />
     <Compile Include="Interpolation.Linear.cs" />
     <Compile Include="Interpolation.Parabolic.cs" />
     <Compile Include="Interpolation.Point.cs" />

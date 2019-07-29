@@ -1,79 +1,42 @@
-﻿using System;
+﻿using MathExtended.Interpolation;
+using System;
 using System.Collections.Generic;
 
 namespace Data.Annex.MathExtended.Interpolation
 {
-    public class Parabolic
+    public class Parabolic : InterpolationAbstract
     {
-        private List<Cartesian2D> _points = new List<Cartesian2D>();
-        private bool _changed = true;
         private double _a;
         private double _b;
         private double _c;
 
         private void CalculateFactors()
         {
-            if (_changed)
+            if (IsChanged)
             {
                 try
                 {
-                    double _D = _points[0].X * _points[0].X * _points[1].X + _points[0].X * _points[2].X * _points[2].X +
-                        _points[1].X * _points[1].X * _points[2].X - _points[1].X * _points[2].X * _points[2].X -
-                        _points[0].X * _points[0].X * _points[2].X - _points[0].X * _points[1].X * _points[1].X;
-                    double _Da = _points[0].Y * _points[1].X + _points[0].X * _points[2].Y + _points[1].Y * _points[2].X -
-                        _points[1].X * _points[2].Y - _points[0].Y * _points[2].X - _points[0].X * _points[1].Y;
-                    double _Db = _points[0].X * _points[0].X * _points[1].Y + _points[0].Y * _points[2].X * _points[2].X +
-                        _points[1].X * _points[1].X * _points[2].Y - _points[1].Y * _points[2].X * _points[2].X -
-                        _points[0].X * _points[0].X * _points[2].Y - _points[0].Y * _points[1].X * _points[1].X;
-                    double _Dc = _points[0].X * _points[0].X * _points[1].X * _points[2].Y + _points[0].X * _points[1].Y * _points[2].X * _points[2].X +
-                        _points[0].Y * _points[1].X * _points[1].X * _points[2].X - _points[0].Y * _points[1].X * _points[2].X * _points[2].X -
-                        _points[0].X * _points[0].X * _points[1].Y * _points[2].X - _points[0].X * _points[1].X * _points[1].X * _points[2].Y;
+                    double _D = Points[0].X * Points[0].X * Points[1].X + Points[0].X * Points[2].X * Points[2].X +
+                        Points[1].X * Points[1].X * Points[2].X - Points[1].X * Points[2].X * Points[2].X -
+                        Points[0].X * Points[0].X * Points[2].X - Points[0].X * Points[1].X * Points[1].X;
+                    double _Da = Points[0].Y * Points[1].X + Points[0].X * Points[2].Y + Points[1].Y * Points[2].X -
+                        Points[1].X * Points[2].Y - Points[0].Y * Points[2].X - Points[0].X * Points[1].Y;
+                    double _Db = Points[0].X * Points[0].X * Points[1].Y + Points[0].Y * Points[2].X * Points[2].X +
+                        Points[1].X * Points[1].X * Points[2].Y - Points[1].Y * Points[2].X * Points[2].X -
+                        Points[0].X * Points[0].X * Points[2].Y - Points[0].Y * Points[1].X * Points[1].X;
+                    double _Dc = Points[0].X * Points[0].X * Points[1].X * Points[2].Y + Points[0].X * Points[1].Y * Points[2].X * Points[2].X +
+                        Points[0].Y * Points[1].X * Points[1].X * Points[2].X - Points[0].Y * Points[1].X * Points[2].X * Points[2].X -
+                        Points[0].X * Points[0].X * Points[1].Y * Points[2].X - Points[0].X * Points[1].X * Points[1].X * Points[2].Y;
                     _a = _Da / _D;
                     _b = _Db / _D;
                     _c = _Dc / _D;
-                    _changed = false;
+                    IsChanged = false;
                 }
                 catch (Exception)
                 {
                     throw new ArgumentOutOfRangeException();
                 }
             }
-        }
-
-        public void Add(double ValueX, double ValueY)
-        {
-            if (_points.Count == 3)
-                throw new ArgumentException("Parabolic interpolation requires 3 points.");
-            _points.Add(new Cartesian2D() { X = ValueX, Y = ValueY });
-            _changed = true;
-        }
-
-        public void Add(double[] ValuesX, double[] ValuesY)
-        {
-            if ((ValuesX.Length != ValuesY.Length) || (ValuesX.Length != 3) || (ValuesY.Length != 3))
-                throw new ArgumentException("Parabolic interpolation requires 3 points.");
-            for (int n = 0; n < ValuesX.Length; n++)
-            {
-                _points.Add(new Cartesian2D() { X = ValuesX[n], Y = ValuesY[n] });
-            }
-            _changed = true;
-        }
-
-        public void Add(Dictionary<double, double> Values)
-        {
-            if (Values.Count != 3)
-                throw new ArgumentException("Parabolic interpolation requires 3 points.");
-            foreach (KeyValuePair<double, double> _pair in Values)
-            {
-                _points.Add(new Cartesian2D() { X = _pair.Key, Y = _pair.Value });
-            }
-            _changed = true;
-        }
-
-        public void Clear()
-        {
-            _points.Clear();
-            _changed = true;
         }
 
         public Parabolic()
@@ -101,9 +64,9 @@ namespace Data.Annex.MathExtended.Interpolation
             Add(X3, Y3);
         }
 
-        public double Interpolate(double X)
+        public override double Interpolate(double X)
         {
-            if (_points.Count != 3)
+            if (PointsCount != 3)
                 throw new ArgumentException("Parabolic interpolation requires 3 points.");
             CalculateFactors();
             return _a * Math.Pow(X, 2) + _b * X + _c;

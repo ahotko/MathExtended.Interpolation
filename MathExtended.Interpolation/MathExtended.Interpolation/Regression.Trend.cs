@@ -1,9 +1,6 @@
-﻿using System;
+﻿using Data.Annex.MathExtended.Interpolation; //for Cartesian2D
+using System;
 using System.Collections.Generic;
-using Data.Annex.MathExtended.Interpolation; //for Cartesian2D
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Data.Annex.MathExtended.Regression
 {

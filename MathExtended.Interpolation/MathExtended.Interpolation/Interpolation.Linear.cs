@@ -1,54 +1,11 @@
-﻿using System;
+﻿using MathExtended.Interpolation;
+using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Data.Annex.MathExtended.Interpolation
 {
-    public class Linear
+    public class Linear : InterpolationAbstract
     {
-        private bool _changed = true;
-        private List<Cartesian2D> _points = new List<Cartesian2D>();
-
-        public void Add(double ValueX, double ValueY)
-        {
-            //if (_points.Count == 2)
-            //    throw new ArgumentException("Linear interpolation requires 2 points.");
-            _points.Add(new Cartesian2D() { X = ValueX, Y = ValueY });
-        }
-
-        private void Sort()
-        {
-            _points.Sort((a, b) => a.X.CompareTo(b.X));
-            _changed = false;
-        }
-
-        public void Add(double[] ValuesX, double[] ValuesY)
-        {
-            if ((ValuesX.Length != ValuesY.Length) || (ValuesX.Length != 2) || (ValuesY.Length != 2))
-                throw new ArgumentException("Linear interpolation requires 2 points.");
-            for (int n = 0; n < ValuesX.Length; n++)
-            {
-                _points.Add(new Cartesian2D() { X = ValuesX[n], Y = ValuesY[n] });
-                _changed = true;
-            }
-        }
-
-        public void Add(Dictionary<double, double> Values)
-        {
-            if (Values.Count != 2)
-                throw new ArgumentException("Linear interpolation requires 2 points.");
-            foreach (KeyValuePair<double, double> _pair in Values)
-            {
-                _points.Add(new Cartesian2D() { X = _pair.Key, Y = _pair.Value });
-                _changed = true;
-            }
-        }
-
-        public void Clear()
-        {
-            _points.Clear();
-        }
-
         public Linear()
         {
             Clear();
@@ -73,18 +30,18 @@ namespace Data.Annex.MathExtended.Interpolation
             Add(X2, Y2);
         }
 
-        public double Interpolate(double X)
+        public override double Interpolate(double X)
         {
-            if (_points.Count < 2)
+            if (PointsCount < 2)
                 throw new ArgumentException("Linear interpolation requires at least 2 points.");
-            if (_changed) Sort();
-            var _interval = PointFunctions.FindInterval(X, _points);
+            if (IsChanged) Sort();
+            var _interval = PointFunctions.FindInterval(X, Points);
             var _left = _interval.Item1;
             var _right = _interval.Item2;
             //var _left = _points.Where(p => p.X <= X).LastOrDefault();
             //var _right = _points.Where(p => p.X > X).FirstOrDefault();
             if(_left == null || _right == null || _left.Equals(_right))
-                throw new ArgumentOutOfRangeException();
+                throw new ArgumentOutOfRangeException($"Wrong interpolation point (x = {X}).");
             return (_left.Y + (((X - _left.X) / (_right.X - _left.X)) * (_right.Y - _left.Y)));
         }
     }

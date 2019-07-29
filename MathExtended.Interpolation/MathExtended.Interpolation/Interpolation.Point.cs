@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Data.Annex.MathExtended.Interpolation
 {
-    class Cartesian2D
+    public class Cartesian2D
     {
         public double X { get; set; }
         public double Y { get; set; }

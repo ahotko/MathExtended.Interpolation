@@ -1,6 +1,6 @@
-﻿using System;
-using Data.Annex.MathExtended.Interpolation;
+﻿using Data.Annex.MathExtended.Interpolation;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
 namespace MathExtended.InterpolationTest
 {

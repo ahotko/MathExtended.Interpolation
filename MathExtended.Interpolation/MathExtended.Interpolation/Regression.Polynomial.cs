@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Data.Annex.MathExtended.Interpolation;
 using Data.Annex.MathExtended.Matrices;
-using Data.Annex.MathExtended.Interpolation;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System;
+using System.Collections.Generic;
 
 namespace Data.Annex.MathExtended.Regression
 {

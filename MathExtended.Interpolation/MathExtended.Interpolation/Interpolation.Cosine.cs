@@ -1,53 +1,11 @@
-﻿using System;
+﻿using MathExtended.Interpolation;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Data.Annex.MathExtended.Interpolation
 {
-    public class Cosine
+    public class Cosine : InterpolationAbstract
     {
-        private bool _changed = true;
-        private List<Cartesian2D> _points = new List<Cartesian2D>();
-
-        private void Sort()
-        {
-            _points.Sort((a, b) => a.X.CompareTo(b.X));
-        }
-
-        public void Add(double ValueX, double ValueY)
-        {
-            _points.Add(new Cartesian2D(ValueX, ValueY));
-            _changed = true;
-        }
-
-        public void Add(double[] ValuesX, double[] ValuesY)
-        {
-            if ((ValuesX.Length != ValuesY.Length) || (ValuesX.Length == 0) || (ValuesY.Length == 0))
-                throw new ArgumentException();
-            for (int n = 0; n < ValuesX.Length; n++)
-            {
-                _points.Add(new Cartesian2D() { X = ValuesX[n], Y = ValuesY[n] });
-            }
-            _changed = true;
-        }
-
-        public void Add(Dictionary<double, double> Values)
-        {
-            foreach (KeyValuePair<double, double> _pair in Values)
-            {
-                _points.Add(new Cartesian2D(_pair.Key, _pair.Value));
-            }
-            _changed = true;
-        }
-
-        public void Clear()
-        {
-            _points.Clear();
-            _changed = true;
-        }
-
         public Cosine()
         {
             Clear();
@@ -65,16 +23,16 @@ namespace Data.Annex.MathExtended.Interpolation
             Add(ValuesX, ValuesY);
         }
 
-        public double Interpolate(double X)
+        public override double Interpolate(double X)
         {
-            if (_points.Count < 2)
+            if (PointsCount < 2)
                 throw new ArgumentException("Cosine Interpolation requires at least 2 points.");
-            if (_changed) Sort();
-            var _interval = PointFunctions.FindInterval(X, _points);
+            if (IsChanged) Sort();
+            var _interval = PointFunctions.FindInterval(X, Points);
             var _left = _interval.Item1;
             var _right = _interval.Item2;
             if (_left == null || _right == null || _left.Equals(_right) || _left.X == _right.X)
-                throw new ArgumentOutOfRangeException();
+                throw new ArgumentOutOfRangeException($"Wrong interpolation point (x = {X}).");
             double _deltaX = _right.X - _left.X;
             double _xt = (1.0 - Math.Cos((X - _left.X) / _deltaX * Math.PI)) / 2.0;
             return (_left.Y * (1.0 - _xt) + _right.Y * _xt);
