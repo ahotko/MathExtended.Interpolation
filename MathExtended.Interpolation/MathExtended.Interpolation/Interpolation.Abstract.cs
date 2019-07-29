@@ -6,16 +6,16 @@ namespace MathExtended.Interpolation
 {
     public abstract class InterpolationAbstract
     {
-        private List<Data.Annex.MathExtended.Interpolation.Cartesian2D> _points = new List<Cartesian2D>();
+        private readonly List<Data.Annex.MathExtended.Interpolation.Cartesian2D> _points = new List<Cartesian2D>();
         private bool _changed = true;
 
-        public bool IsChanged { get => _changed; set => _changed = value; }
+        protected bool IsChanged { get => _changed; set => _changed = value; }
 
-        public int PointsCount => _points.Count;
+        protected int PointsCount => _points.Count;
 
-        public List<Cartesian2D> Points => _points;
+        protected List<Cartesian2D> Points => _points;
 
-        public void Sort()
+        protected void Sort()
         {
             _points.Sort((a, b) => a.X.CompareTo(b.X));
         }
