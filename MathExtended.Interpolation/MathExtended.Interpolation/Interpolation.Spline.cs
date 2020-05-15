@@ -14,7 +14,7 @@ namespace Data.Annex.MathExtended.Interpolation
 
         private void CalculateSpline()
         {
-            if (IsChanged)
+            if (Changed)
             {
                 Sort();
                 _derivatives = new double[PointsCount];
@@ -47,7 +47,7 @@ namespace Data.Annex.MathExtended.Interpolation
                     _derivatives[i] = _derivatives[i] * _derivatives[i + 1] + _upperTriangle[i];
                 }
                 //
-                IsChanged = false;
+                Changed = false;
             }
         }
 

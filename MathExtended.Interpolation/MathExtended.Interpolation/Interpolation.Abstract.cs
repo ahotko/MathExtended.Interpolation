@@ -1,29 +1,27 @@
 ﻿using Data.Annex.MathExtended.Interpolation;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 
 namespace MathExtended.Interpolation
 {
     public abstract class InterpolationAbstract
     {
-        private readonly List<Data.Annex.MathExtended.Interpolation.Cartesian2D> _points = new List<Cartesian2D>();
-        private bool _changed = true;
+        protected bool Changed { get; set; }
 
-        protected bool IsChanged { get => _changed; set => _changed = value; }
+        protected int PointsCount => Points.Count;
 
-        protected int PointsCount => _points.Count;
-
-        protected List<Cartesian2D> Points => _points;
+        protected List<Cartesian2D> Points { get; set; } = new List<Cartesian2D>();
 
         protected void Sort()
         {
-            _points.Sort((a, b) => a.X.CompareTo(b.X));
+            Points.Sort((a, b) => a.X.CompareTo(b.X));
         }
 
         public void Add(double ValueX, double ValueY)
         {
-            _points.Add(new Cartesian2D(ValueX, ValueY));
-            _changed = true;
+            Points.Add(new Cartesian2D(ValueX, ValueY));
+            Changed = true;
         }
 
         public void Add(double[] ValuesX, double[] ValuesY)
@@ -32,24 +30,33 @@ namespace MathExtended.Interpolation
                 throw new ArgumentException("Lengths of X and Y coordinate values must be the same");
             for (int n = 0; n < ValuesX.Length; n++)
             {
-                _points.Add(new Cartesian2D() { X = ValuesX[n], Y = ValuesY[n] });
+                Points.Add(new Cartesian2D() { X = ValuesX[n], Y = ValuesY[n] });
             }
-            _changed = true;
+            Changed = true;
         }
 
-        public void Add(Dictionary<double, double> Values)
+        public void Add(Dictionary<double, double> values)
         {
-            foreach (KeyValuePair<double, double> _pair in Values)
+            foreach (KeyValuePair<double, double> _pair in values)
             {
-                _points.Add(new Cartesian2D(_pair.Key, _pair.Value));
+                Points.Add(new Cartesian2D(_pair.Key, _pair.Value));
             }
-            _changed = true;
+            Changed = true;
+        }
+
+        public void Add(IEnumerable<PointF> values)
+        {
+            foreach (PointF point in values)
+            {
+                Points.Add(new Cartesian2D(point.X, point.Y));
+            }
+            Changed = true;
         }
 
         public void Clear()
         {
-            _points.Clear();
-            _changed = true;
+            Points.Clear();
+            Changed = true;
         }
 
         public abstract double Interpolate(double X);

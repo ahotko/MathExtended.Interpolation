@@ -27,7 +27,7 @@ namespace Data.Annex.MathExtended.Interpolation
         {
             if (PointsCount < 2)
                 throw new ArgumentException("Cosine Interpolation requires at least 2 points.");
-            if (IsChanged) Sort();
+            if (Changed) Sort();
             var _interval = PointFunctions.FindInterval(X, Points);
             var _left = _interval.Item1;
             var _right = _interval.Item2;

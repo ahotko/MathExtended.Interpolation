@@ -12,7 +12,7 @@ namespace Data.Annex.MathExtended.Interpolation
 
         private void CalculateFactors()
         {
-            if (IsChanged)
+            if (Changed)
             {
                 try
                 {
@@ -30,7 +30,7 @@ namespace Data.Annex.MathExtended.Interpolation
                     _a = _Da / _D;
                     _b = _Db / _D;
                     _c = _Dc / _D;
-                    IsChanged = false;
+                    Changed = false;
                 }
                 catch (Exception)
                 {

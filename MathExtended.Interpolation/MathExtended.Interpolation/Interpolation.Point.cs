@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 
 namespace Data.Annex.MathExtended.Interpolation
 {
@@ -34,6 +35,11 @@ namespace Data.Annex.MathExtended.Interpolation
         public override int GetHashCode()
         {
             return base.GetHashCode();
+        }
+
+        public static implicit operator PointF(Cartesian2D point)
+        {
+            return new PointF((float)point.X, (float)point.Y);
         }
     }
 
