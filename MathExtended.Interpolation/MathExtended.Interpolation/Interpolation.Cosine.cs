@@ -6,22 +6,13 @@ namespace Data.Annex.MathExtended.Interpolation
 {
     public class Cosine : InterpolationAbstract
     {
-        public Cosine()
-        {
-            Clear();
-        }
+        public Cosine() : base() { }
 
-        public Cosine(Dictionary<double, double> Values)
-        {
-            Clear();
-            Add(Values);
-        }
+        public Cosine(Dictionary<double, double> values) : base(values) { }
 
-        public Cosine(double[] ValuesX, double[] ValuesY)
-        {
-            Clear();
-            Add(ValuesX, ValuesY);
-        }
+        public Cosine(double[] x, double[] y) : base(x, y) { }
+
+        public Cosine(double x1, double y1, double x2, double y2) : base(x1, y1, x2, y2) { }
 
         public override double Interpolate(double X)
         {

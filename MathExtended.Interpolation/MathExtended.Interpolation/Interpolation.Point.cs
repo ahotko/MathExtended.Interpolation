@@ -17,9 +17,9 @@ namespace Data.Annex.MathExtended.Interpolation
 
         public Cartesian2D() : this(0, 0) { }
 
-        private bool NearlyEqual(double v1, double v2)
+        private bool NearlyEqual(double v1, double v2, double epsilon = 1E-5)
         {
-            return Math.Abs(v1 - v2) < 0.00001;
+            return Math.Abs(v1 - v2) < epsilon;
         }
 
         public override bool Equals(Object obj)
@@ -34,7 +34,7 @@ namespace Data.Annex.MathExtended.Interpolation
 
         public override int GetHashCode()
         {
-            return base.GetHashCode();
+            return (X.GetHashCode() * 31) ^ (Y.GetHashCode() * 17);
         }
 
         public static implicit operator PointF(Cartesian2D point)
@@ -45,7 +45,7 @@ namespace Data.Annex.MathExtended.Interpolation
 
     static class PointFunctions
     {
-        public static Tuple<int,int> FindIntervalIndex(double x, List<Cartesian2D> points)
+        public static Tuple<int, int> FindIntervalIndex(double x, List<Cartesian2D> points)
         {
             int _idxLeft = 0;
             int _idxRight = points.Count - 1;

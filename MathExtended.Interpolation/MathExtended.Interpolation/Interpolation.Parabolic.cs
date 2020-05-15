@@ -39,22 +39,11 @@ namespace Data.Annex.MathExtended.Interpolation
             }
         }
 
-        public Parabolic()
-        {
-            Clear();
-        }
+        public Parabolic() : base() { }
 
-        public Parabolic(Dictionary<double, double> Values)
-        {
-            Clear();
-            Add(Values);
-        }
+        public Parabolic(Dictionary<double, double> values) : base(values) { }
 
-        public Parabolic(double[] ValuesX, double[] ValuesY)
-        {
-            Clear();
-            Add(ValuesX, ValuesY);
-        }
+        public Parabolic(double[] x, double[] y) : base(x, y) { }
 
         public Parabolic(double X1, double Y1, double X2, double Y2, double X3, double Y3)
         {

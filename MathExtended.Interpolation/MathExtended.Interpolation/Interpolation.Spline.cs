@@ -51,24 +51,11 @@ namespace Data.Annex.MathExtended.Interpolation
             }
         }
 
-        public Spline()
-        {
-            Clear();
-        }
+        public Spline() : base() { }
 
-        public Spline(Dictionary<double, double> Values)
-        {
-            Clear();
-            Add(Values);
-            CalculateSpline();
-        }
+        public Spline(Dictionary<double, double> values) : base(values) { }
 
-        public Spline(double[] ValuesX, double[] ValuesY)
-        {
-            Clear();
-            Add(ValuesX, ValuesY);
-            CalculateSpline();
-        }
+        public Spline(double x1, double y1, double x2, double y2) : base(x1, y1, x2, y2) { }
 
         public override double Interpolate(double X)
         {
