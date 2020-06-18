@@ -1,5 +1,4 @@
-﻿using MathExtended.Interpolation;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace Data.Annex.MathExtended.Interpolation

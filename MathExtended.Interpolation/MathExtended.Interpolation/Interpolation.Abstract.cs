@@ -1,9 +1,8 @@
-﻿using Data.Annex.MathExtended.Interpolation;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
 
-namespace MathExtended.Interpolation
+namespace Data.Annex.MathExtended.Interpolation
 {
     public abstract class InterpolationAbstract
     {

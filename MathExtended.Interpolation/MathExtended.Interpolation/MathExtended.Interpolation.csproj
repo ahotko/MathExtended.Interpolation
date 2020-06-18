@@ -44,6 +44,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Clamping\Clamping.cs" />
+    <Compile Include="Clamping\Clamping.SmoothStep.cs" />
     <Compile Include="Interpolation.Cosine.cs" />
     <Compile Include="Interpolation.Abstract.cs" />
     <Compile Include="Interpolation.Linear.cs" />
@@ -53,6 +55,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Regression.Polynomial.cs" />
     <Compile Include="Regression.Trend.cs" />
+    <Compile Include="Wrapping\Wrapping.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
