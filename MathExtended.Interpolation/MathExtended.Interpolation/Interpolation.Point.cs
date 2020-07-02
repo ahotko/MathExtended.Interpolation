@@ -37,9 +37,29 @@ namespace Data.Annex.MathExtended.Interpolation
             return (X.GetHashCode() * 31) ^ (Y.GetHashCode() * 17);
         }
 
+        public override string ToString()
+        {
+            return $"x = {X:N4}, y = {Y:N4}";
+        }
+
         public static implicit operator PointF(Cartesian2D point)
         {
             return new PointF((float)point.X, (float)point.Y);
+        }
+
+        public static Cartesian2D operator +(Cartesian2D coordinates) => coordinates;
+
+        public static Cartesian2D operator +(Cartesian2D coordinates, double length)
+        {
+            double r = Math.Sqrt(Math.Pow(coordinates.X, 2) + Math.Pow(coordinates.Y, 2)) + length;
+            double theta = Math.Atan2(coordinates.Y, coordinates.X);
+
+            return new Cartesian2D(r * Math.Cos(theta), r * Math.Sin(theta));
+        }
+
+        public static Cartesian2D operator +(double length, Cartesian2D coordinates)
+        {
+            return coordinates + length;
         }
     }
 

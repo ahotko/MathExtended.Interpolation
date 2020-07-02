@@ -38,9 +38,21 @@ namespace MathExtended.Interpolation.Driver
             }
         }
 
+        private static void CartesianCoordinates()
+        {
+            var coordinates = new Cartesian2D(1, 1);
+            coordinates += Math.Sqrt(2.0);
+
+            Console.WriteLine(coordinates.ToString());
+        }
+
         static void Main(string[] args)
         {
             SplineInterpolation();
+
+            Console.WriteLine();
+
+            CartesianCoordinates();
 
             Console.ReadKey();
         }
