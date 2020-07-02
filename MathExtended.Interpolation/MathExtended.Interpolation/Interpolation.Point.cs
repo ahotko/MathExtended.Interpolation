@@ -63,7 +63,7 @@ namespace Data.Annex.MathExtended.Interpolation
 
         public static Tuple<Cartesian2D, Cartesian2D> FindInterval(double x, List<Cartesian2D> points)
         {
-            if (x >= points[points.Count - 1].X || x <= points[0].X)
+            if (x > points[points.Count - 1].X || x < points[0].X)
                 return new Tuple<Cartesian2D, Cartesian2D>(null, null);
             int _idxLeft = 0;
             int _idxRight = points.Count - 1;

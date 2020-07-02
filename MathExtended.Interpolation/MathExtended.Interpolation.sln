@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MathExtended.Interpolation"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MathExtended.InterpolationTest", "..\MathExtended.InterpolationTest\MathExtended.InterpolationTest\MathExtended.InterpolationTest.csproj", "{96A857AC-C32F-4B1D-89CF-CB916270DA98}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MathExtended.Interpolation.Driver", "MathExtended.Interpolation.Driver\MathExtended.Interpolation.Driver.csproj", "{43C6C95E-5543-4BAA-8669-8F624A6AC21F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{96A857AC-C32F-4B1D-89CF-CB916270DA98}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{96A857AC-C32F-4B1D-89CF-CB916270DA98}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{96A857AC-C32F-4B1D-89CF-CB916270DA98}.Release|Any CPU.Build.0 = Release|Any CPU
+		{43C6C95E-5543-4BAA-8669-8F624A6AC21F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43C6C95E-5543-4BAA-8669-8F624A6AC21F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43C6C95E-5543-4BAA-8669-8F624A6AC21F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43C6C95E-5543-4BAA-8669-8F624A6AC21F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
