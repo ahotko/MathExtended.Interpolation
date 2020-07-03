@@ -21,10 +21,20 @@ namespace MathExtended.Interpolation.Driver
             linearInterpolation.Add(10, 15);
             linearInterpolation.Add(11, 11.3);
 
-            for (int n=10; n<111; n++)
+            var cosineInterpolation = new Cosine();
+            cosineInterpolation.Add(1, 2);
+            cosineInterpolation.Add(5, 8);
+            cosineInterpolation.Add(7.7, 5);
+            cosineInterpolation.Add(10, 15);
+            cosineInterpolation.Add(11, 11.3);
+
+            Console.WriteLine($"Value;Linear;Spline;Cosine");
+
+            for (int n = 10; n < 111; n++)
             {
-                double interpolatedValueLinear = linearInterpolation.Interpolate(n/10.0);
-                double interpolatedValueSpline = splineInterpolation.Interpolate(n/10.0);
+                double interpolatedValueLinear = linearInterpolation.Interpolate(n / 10.0);
+                double interpolatedValueSpline = splineInterpolation.Interpolate(n / 10.0);
+                double interpolatedValueCosine = cosineInterpolation.Interpolate(n / 10.0);
 
 
                 if (n == 10 || n == 50 || n == 77 || n == 100 || n == 110)
@@ -32,7 +42,7 @@ namespace MathExtended.Interpolation.Driver
                     Console.ForegroundColor = ConsoleColor.Green;
                 }
 
-                Console.WriteLine($"{n/10.0:N1};{interpolatedValueSpline:N3};{interpolatedValueLinear:N3}");
+                Console.WriteLine($"{n / 10.0:N1};{interpolatedValueSpline:N3};{interpolatedValueLinear:N3};{interpolatedValueCosine:N3}");
 
                 Console.ResetColor();
             }
