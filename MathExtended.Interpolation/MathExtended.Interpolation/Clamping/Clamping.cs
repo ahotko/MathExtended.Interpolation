@@ -1,4 +1,4 @@
-﻿namespace MathExtended.Interpolation.Clamping
+﻿namespace MathExtended.Limiting
 {
     public abstract class Clamping
     {

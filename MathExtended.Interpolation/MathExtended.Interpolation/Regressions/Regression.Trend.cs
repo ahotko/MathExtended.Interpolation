@@ -1,8 +1,8 @@
-﻿using Data.Annex.MathExtended.Interpolation; //for Cartesian2D
+﻿using MathExtended.Additional;
 using System;
 using System.Collections.Generic;
 
-namespace Data.Annex.MathExtended.Regression
+namespace MathExtended.Regressions
 {
     public class LinearTrend
     {

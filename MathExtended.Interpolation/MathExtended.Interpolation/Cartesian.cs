@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 
-namespace Data.Annex.MathExtended.Interpolation
+namespace MathExtended.Additional
 {
     public class Cartesian2D
     {
@@ -81,10 +81,10 @@ namespace Data.Annex.MathExtended.Interpolation
             return new Tuple<int, int>(_idxLeft, _idxRight);
         }
 
-        public static Tuple<Cartesian2D, Cartesian2D> FindInterval(double x, List<Cartesian2D> points)
+        public static (Cartesian2D left, Cartesian2D right) FindInterval(double x, List<Cartesian2D> points)
         {
             if (x > points[points.Count - 1].X || x < points[0].X)
-                return new Tuple<Cartesian2D, Cartesian2D>(null, null);
+                return (null, null);
             int _idxLeft = 0;
             int _idxRight = points.Count - 1;
             //bracket the X value using binary search
@@ -96,7 +96,7 @@ namespace Data.Annex.MathExtended.Interpolation
                 else
                     _idxLeft = i;
             }
-            return new Tuple<Cartesian2D, Cartesian2D>(points[_idxLeft], points[_idxRight]);
+            return (points[_idxLeft], points[_idxRight]);
         }
     }
 }

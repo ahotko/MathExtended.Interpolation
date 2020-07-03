@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MathExtended.Interpolation.Wrapping
+namespace MathExtended.Limiting
 {
     public class Wrapping
     {
