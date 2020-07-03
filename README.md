@@ -8,25 +8,32 @@ MathExtended.Interpolation is project by Ales Hotko and was first released in Ap
 ## Usage
 
 ```csharp
-using Data.Annex.MathExtended.Interpolation;
+using MathExtended.Interpolations;
+
+var interpolation = new Interpolation();
+interpolation.Add(1, 2);
+interpolation.Add(5, 8);
+interpolation.Add(7.7, 5);
+interpolation.Add(10, 15);
+interpolation.Add(11, 11.3);
 
 //Linear interpolation
-Linear linear = new Linear();
-linear.Add(0, 0);
-linear.Add(2.5, 2.5);
-linear.Add(5, 10);
-double result = linear.Interpolate(3.5);
-
-//Parabolic interpolation; parabola between 3 points			
-Parabolic parabolic = new Parabolic(-2, 4, 0, 0, 2, 4);
-double result = parabolic.Interpolate(3.5);
+double interpolatedValueLinear = interpolation.Linear(3.5);
+//...or...
+interpolation.Linear();
+double interpolatedValueLinear = interpolation.Interpolate(3.5);
 
 //Spline interpolation
-Spline spline = new Spline();
-spline.Add(-6, 2);
-spline.Add(2, -4);
-spline.Add(6, 6);	
-double result = spline.Interpolate(3.5);		
+double interpolatedValue = interpolation.Spline(3.5);
+//...or...
+interpolation.Spline();
+double interpolatedValue = interpolation.Interpolate(3.5);	
+
+//Cosine interpolation
+double interpolatedValue = interpolation.Cosine(3.5);
+//...or...
+interpolation.Cosine();
+double interpolatedValue = interpolation.Interpolate(3.5);	
 ```
 
 ## Optional parameters and overloads
