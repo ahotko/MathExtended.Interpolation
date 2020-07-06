@@ -1,4 +1,5 @@
 ﻿using MathExtended.Additional;
+using MathExtended.Regressions;
 using System;
 
 namespace MathExtended.Interpolations.Driver
@@ -73,7 +74,7 @@ namespace MathExtended.Interpolations.Driver
         {
             var interpolation = new Interpolation();
 
-            #region Temperature Points
+            #region [Temperature Points]
             interpolation.Add(0, 24.9);
             interpolation.Add(10, 24.8);
             interpolation.Add(20, 24.8);
@@ -232,6 +233,31 @@ namespace MathExtended.Interpolations.Driver
             }
         }
 
+        private static void RegressionPoly()
+        {
+            var regression = new PolynomialRegression();
+            regression.Add(1.1, 1);
+            regression.Add(2, 5);
+            regression.Add(5, 7);
+            regression.Add(5.5, 8);
+            regression.Add(7, 4.3);
+            regression.Add(9, 5);
+
+            regression.Degree = 4;
+
+            for (int n = 10; n < 91; n++)
+            {
+                double regressionValue = regression.Value(n/10.0);
+
+                Console.WriteLine($"{n:N1};{regressionValue:N3}");
+            }
+        }
+
+        private static void RegressionTrend()
+        {
+
+        }
+
         private static void CartesianCoordinates()
         {
             var coordinates = new Cartesian2D(1, 1);
@@ -249,6 +275,9 @@ namespace MathExtended.Interpolations.Driver
             Console.WriteLine();
 
             InterpolationSnippetsActualTemperature();
+            Console.WriteLine();
+
+            RegressionPoly();
             Console.WriteLine();
 
             CartesianCoordinates();

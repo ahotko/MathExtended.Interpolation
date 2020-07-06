@@ -56,6 +56,8 @@
     <Compile Include="Cartesian.cs" />
     <Compile Include="Interpolations\Interpolation.Spline.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Regressions\IRegression.cs" />
+    <Compile Include="Regressions\Regression.cs" />
     <Compile Include="Regressions\Regression.Polynomial.cs" />
     <Compile Include="Regressions\Regression.Trend.cs" />
     <Compile Include="Wrapping\Wrapping.cs" />

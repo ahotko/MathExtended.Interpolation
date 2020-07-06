@@ -1,5 +1,5 @@
-﻿using Data.Annex.MathExtended.Matrices;
-using MathExtended.Additional;
+﻿using MathExtended.Additional;
+using MathExtended.Matrices;
 using System;
 using System.Collections.Generic;
 
@@ -8,8 +8,10 @@ namespace MathExtended.Regressions
     public class PolynomialRegression
     {
         private bool _changed = true;
-        private List<Cartesian2D> _points = new List<Cartesian2D>();
+
         private int _degree = 2;
+
+        private List<Cartesian2D> _points = new List<Cartesian2D>();
         private List<double> _coefficients = new List<double>();
 
         private void Sort()
@@ -22,25 +24,29 @@ namespace MathExtended.Regressions
             if (_changed)
             {
                 Sort();
-                int _len = _points.Count;
+                int pointCount = _points.Count;
                 //poly degree cannot be higher than count of data points
-                if (_degree > _len) _degree = _len;
-                var _x = new Matrix(_len, _degree + 1);
-                var _y = new Matrix(_len, 1);
-                for (int m = 0; m < _len; m++)
+                if (_degree > pointCount) _degree = pointCount;
+                var x = new Matrix(pointCount, _degree + 1);
+                var y = new Matrix(pointCount, 1);
+
+                var l = new Matrix(2, 2);
+                l[1, 1] = 1;
+                l[1, 2] = 2;
+                l[2, 1] = 3;
+                l[2, 2] = 4;
+
+                for (int m = 0; m < pointCount; m++)
                 {
                     for (int n = 0; n <= _degree; n++)
                     {
-                        _x[m + 1, n + 1] = Math.Pow(_points[m].X, n);
+                        x[m + 1, n + 1] = Math.Pow(_points[m].X, n);
                     }
-                    _y[m + 1, 1] = _points[m].Y;
+                    y[m + 1, 1] = _points[m].Y;
                 }
-                var _xt = _x.Duplicate();
-                _xt.Transpose();
-                var _xtx = _xt * _x;
-                _xtx.Inverse();
-                var _xtxi = _xtx * _xt;
-                var _r = _xtxi * _y;
+
+                var _r = (!(~x * x) * (~x)) * y;
+
                 _coefficients.Clear();
                 for (int n = 0; n <= _degree; n++)
                 {
@@ -116,7 +122,7 @@ namespace MathExtended.Regressions
         public double Value(double x)
         {
             if (_points.Count < 2)
-                throw new ArgumentOutOfRangeException("points", "Not enough data points.");
+                throw new ArgumentOutOfRangeException(nameof(_points), "Not enough data points.");
             Calculate();
             double _result = 0.0;
             double _x = 1.0;
