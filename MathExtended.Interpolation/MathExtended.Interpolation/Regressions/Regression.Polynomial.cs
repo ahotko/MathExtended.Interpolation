@@ -30,12 +30,6 @@ namespace MathExtended.Regressions
                 var x = new Matrix(pointCount, _degree + 1);
                 var y = new Matrix(pointCount, 1);
 
-                var l = new Matrix(2, 2);
-                l[1, 1] = 1;
-                l[1, 2] = 2;
-                l[2, 1] = 3;
-                l[2, 2] = 4;
-
                 for (int m = 0; m < pointCount; m++)
                 {
                     for (int n = 0; n <= _degree; n++)
